@@ -20,7 +20,7 @@
       <li>น้ำหนัก : {{general.height}}</li>
     </ul>
     <button v-on:click="showData">ตกลง</button> <!--การใช้งาน Event on click-->
-    <button @click="incerment">เพิ่ม</button> <!--การเพิ่มค่าด้วย on click-->
+    <button @click="incerment(10)">เพิ่ม</button> <!--การเพิ่มค่าด้วย on click-->
     <button @click="decrement">ลด</button>
   </section>
 </template>
@@ -51,8 +51,8 @@ export default {
    showData(){
      alert(this.firstName)
    },
-   incerment(){
-     this.age++
+   incerment(value){ //การส่ง อากิวเม้นมาคำนวณ
+     this.age+=value
    },
    decrement(){
      this.age--
