@@ -40,8 +40,11 @@
       <ul>
         <li v-for="(item, key) in general" :key="key">{{ item }}</li>
       </ul>
-
+      <h1>เงินเดือน : {{salary}}</h1>
+      <button @click="addSalary(5000)">เพิ่มเงินเดือน</button>
       <!--การนำ ฟังก์ชั่นมาใช้งานระหว่างสร้าง Method และ computed-->
+      
+      <h1>ตำแหน่ง : {{getDepartment}}</h1>
       <h1>Randoms Math Medthod 1 : {{getRandomsMethod()}} ค่าต่างกัน</h1>
       <h1>Randoms Math Medthod 2 : {{getRandomsMethod()}} ค่าต่างกัน</h1>
       <hr>
@@ -75,6 +78,8 @@ export default {
       number: ["ดูหนัง", "เล่นเกม", "ฟังเพลง", "อ่านหนังสือ", "ดูอนิเมะ"],
       general: { gender: "ชาย", weight: 65, height: 170, fdsf: 11 },
       isVisble: false,
+      salary : 25000,
+      
     };
   },
   methods: {
@@ -94,17 +99,29 @@ export default {
     toggleVisible() {
       this.isVisble = !this.isVisble;
     },
+    addSalary(value){ //setter ส่งค่ามาและคำนวณ
+      this.salary+=value;
+    },
     getRandomsMethod() {
       return Math.random();
     }
   },
-  computed: { //สร้าง computed properties
+
+  computed: { //สร้าง computed properties **จะถูกสร้างเพื่อนำไปใช้ในการคำนวญตัวเลข หรือเงือนไขต่างๆ
     getFullName() {
       return `${this.firstName + " " + this.lastName}`;
     },
     getRandomsComputed() {
       return Math.random();
+    },
+    getSalary(){
+      return this.salary * 12;
+    },
+    getDepartment(){ //ถ้าเงินเดือนมากกว่า 40k คือหัวหน้า
+      return this.salary >= 40000 ? "หัวหน้า" : "พนักงานทั่วไป"
     }
+   
+
   }
 };
 </script>
