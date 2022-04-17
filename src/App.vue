@@ -8,13 +8,17 @@
       <button type="submit">บันทึก</button>
     </form>
     <h1>ชื่อ : {{ firstName }}</h1>
-    <h1>ชื่อ นามสกุล : {{ getFullName() }}</h1>
+    <h1>ชื่อ นามสกุล : {{ getFullName }}</h1>
     <!--ดึงค่าจากฟังก์ชั่น-->
     <h2>ชื่อเล่น : {{ nickName }}</h2>
     <h1>อายุ : {{ age }}</h1>
-     
-    <button @click="toggleVisible"> {{ isVisble ? "ซ่อน" : "แสดง"}}รายละเอียด</button> <!--นำ method มาใช้งาน-->
-    <article v-show="isVisble"> <!--ซ่อนและแสดงเนื้อหา-->
+
+    <button @click="toggleVisible">
+      {{ isVisble ? "ซ่อน" : "แสดง" }}รายละเอียด
+    </button>
+    <!--นำ method มาใช้งาน-->
+    <article v-show="isVisble">
+      <!--ซ่อนและแสดงเนื้อหา-->
       <h1>ที่อยู่ : <span v-html="address"></span></h1>
       <!--ทำให้ tag html แสดงผลได้ด้วย v-html-->
       <p>Social : <a :href="social" trget="_blank">w3schools</a></p>
@@ -36,6 +40,13 @@
       <ul>
         <li v-for="(item, key) in general" :key="key">{{ item }}</li>
       </ul>
+
+      <!--การนำ ฟังก์ชั่นมาใช้งานระหว่างสร้าง Method และ computed-->
+      <h1>Randoms Math Medthod 1 : {{getRandomsMethod()}} ค่าต่างกัน</h1>
+      <h1>Randoms Math Medthod 2 : {{getRandomsMethod()}} ค่าต่างกัน</h1>
+      <hr>
+      <h1>Randoms Math computed 1 : {{getRandomsComputed}} ค่าเดียวกัน</h1>
+      <h1>Randoms Math computed 2 : {{getRandomsComputed}} ค่าเดียวกัน</h1>
 
       <button v-on:click="showData">ตกลง</button>
       <!--การใช้งาน Event on click-->
@@ -67,9 +78,6 @@ export default {
     };
   },
   methods: {
-    getFullName() {
-      return `${this.firstName + " " + this.lastName}`;
-    },
     showData() {
       alert(this.firstName);
     },
@@ -86,7 +94,18 @@ export default {
     toggleVisible() {
       this.isVisble = !this.isVisble;
     },
+    getRandomsMethod() {
+      return Math.random();
+    }
   },
+  computed: { //สร้าง computed properties
+    getFullName() {
+      return `${this.firstName + " " + this.lastName}`;
+    },
+    getRandomsComputed() {
+      return Math.random();
+    }
+  }
 };
 </script>
 
