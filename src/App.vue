@@ -41,7 +41,7 @@
         <li v-for="(item, key) in general" :key="key">{{ item }}</li>
       </ul>
       <h1>เงินเดือน : {{salary}}</h1>
-      <button @click="addSalary(5000)">เพิ่มเงินเดือน</button>
+      <button @click="addSalary(10000)">เพิ่มเงินเดือน</button>
       <!--การนำ ฟังก์ชั่นมาใช้งานระหว่างสร้าง Method และ computed-->
       
       <h1>ตำแหน่ง : {{getDepartment}}</h1>
@@ -120,9 +120,17 @@ export default {
     getDepartment(){ //ถ้าเงินเดือนมากกว่า 40k คือหัวหน้า
       return this.salary >= 40000 ? "หัวหน้า" : "พนักงานทั่วไป"
     }
-   
-
-  }
+  },
+  watch : { //ดักจับ salary ถ้าเกินจะแจ้งเตือน
+    salary(value){
+      if(value > 100000){
+        alert("เงินเดือนไม่ควรเกิน 1 แสนบาท!");
+        setTimeout (() => { //ถ้าเกินจะปรับให้เป็น 1แสน
+          this.salary = 100000;
+        },500) //หน่วงเวลา 0.5 วิ 
+      }
+    }
+  },
 };
 </script>
 
