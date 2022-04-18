@@ -40,16 +40,16 @@
       <ul>
         <li v-for="(item, key) in general" :key="key">{{ item }}</li>
       </ul>
-      <h1>เงินเดือน : {{salary}}</h1>
+      <h1>เงินเดือน : {{ salary }}</h1>
       <button @click="addSalary(10000)">เพิ่มเงินเดือน</button>
       <!--การนำ ฟังก์ชั่นมาใช้งานระหว่างสร้าง Method และ computed-->
-      
-      <h1>ตำแหน่ง : {{getDepartment}}</h1>
-      <h1>Randoms Math Medthod 1 : {{getRandomsMethod()}} ค่าต่างกัน</h1>
-      <h1>Randoms Math Medthod 2 : {{getRandomsMethod()}} ค่าต่างกัน</h1>
-      <hr>
-      <h1>Randoms Math computed 1 : {{getRandomsComputed}} ค่าเดียวกัน</h1>
-      <h1>Randoms Math computed 2 : {{getRandomsComputed}} ค่าเดียวกัน</h1>
+
+      <h1>ตำแหน่ง : {{ getDepartment }}</h1>
+      <h1>Randoms Math Medthod 1 : {{ getRandomsMethod() }} ค่าต่างกัน</h1>
+      <h1>Randoms Math Medthod 2 : {{ getRandomsMethod() }} ค่าต่างกัน</h1>
+      <hr />
+      <h1>Randoms Math computed 1 : {{ getRandomsComputed }} ค่าเดียวกัน</h1>
+      <h1>Randoms Math computed 2 : {{ getRandomsComputed }} ค่าเดียวกัน</h1>
 
       <button v-on:click="showData">ตกลง</button>
       <!--การใช้งาน Event on click-->
@@ -78,8 +78,7 @@ export default {
       number: ["ดูหนัง", "เล่นเกม", "ฟังเพลง", "อ่านหนังสือ", "ดูอนิเมะ"],
       general: { gender: "ชาย", weight: 65, height: 170, fdsf: 11 },
       isVisble: false,
-      salary : 25000,
-      
+      salary: 25000,
     };
   },
   methods: {
@@ -99,37 +98,42 @@ export default {
     toggleVisible() {
       this.isVisble = !this.isVisble;
     },
-    addSalary(value){ //setter ส่งค่ามาและคำนวณ
-      this.salary+=value;
+    addSalary(value) {
+      //setter ส่งค่ามาและคำนวณ
+      this.salary += value;
     },
     getRandomsMethod() {
       return Math.random();
-    }
+    },
   },
 
-  computed: { //สร้าง computed properties **จะถูกสร้างเพื่อนำไปใช้ในการคำนวญตัวเลข หรือเงือนไขต่างๆ
+  computed: {
+    //สร้าง computed properties **จะถูกสร้างเพื่อนำไปใช้ในการคำนวญตัวเลข หรือเงือนไขต่างๆ
     getFullName() {
       return `${this.firstName + " " + this.lastName}`;
     },
     getRandomsComputed() {
       return Math.random();
     },
-    getSalary(){
+    getSalary() {
       return this.salary * 12;
     },
-    getDepartment(){ //ถ้าเงินเดือนมากกว่า 40k คือหัวหน้า
-      return this.salary >= 40000 ? "หัวหน้า" : "พนักงานทั่วไป"
-    }
+    getDepartment() {
+      //ถ้าเงินเดือนมากกว่า 40k คือหัวหน้า
+      return this.salary >= 40000 ? "หัวหน้า" : "พนักงานทั่วไป";
+    },
   },
-  watch : { //ดักจับ salary ถ้าเกินจะแจ้งเตือน
-    salary(value){
-      if(value > 100000){
+  watch: {
+    //ดักจับ salary ถ้าเกินจะแจ้งเตือน
+    salary(value) {
+      if (value > 100000) {
         alert("เงินเดือนไม่ควรเกิน 1 แสนบาท!");
-        setTimeout (() => { //ถ้าเกินจะปรับให้เป็น 1แสน
+        setTimeout(() => {
+          //ถ้าเกินจะปรับให้เป็น 1แสน
           this.salary = 100000;
-        },500) //หน่วงเวลา 0.5 วิ 
+        }, 500); //หน่วงเวลา 0.5 วิ
       }
-    }
+    },
   },
 };
 </script>
